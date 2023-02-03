@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Board">
+
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias alias="BoardVO" type="egovframework.board.vo.BoardVO"/>
+	<typeAlias alias="PagingVO" type="egovframework.board.vo.PagingVO"/>
+	
+	
+	<resultMap id="board" class="egovframework.board.vo.BoardVO">
+		<result property="no" column="no"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="bdate" column="bdate"/>
+	</resultMap>
+
+	
+	
+	<insert id="boardDAO.InsertBoard">
+		insert into ex00 values(ex00_no.nextval,#title#,#content#,sysdate)
+	</insert>
+	
+	<select id="boardDAO.selectAll" parameterClass="BoardVO" resultClass="egovMap">
+		select * from ex00 order by no desc
+	</select>
+	
+	<select id="boardDAO.boardContent" resultMap="board">
+		select * from ex00 where no = #no#
+	</select>
+	
+	<update id="boardDAO.contentEdit">
+		update ex00 set title=#title#, content=#content# where no = #no#
+	</update>
+	
+	<delete id="boardDAO.contentDelete">
+		delete from ex00 where no = #no#
+	</delete>
+
+	
+	
+	
+	
+
+</sqlMap>
